@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import time
 
 # Declare all the rooms
 
@@ -35,10 +37,13 @@ room['treasure'].s_to = room['narrow']
 
 #
 # Main
-#
 
 # Make a new player object that is currently in the 'outside' room.
-
+player_name = input("Select player name: ")
+current_room = room["outside"]
+player1 = Player(f"{player_name}", current_room)
+# print(player1.name)
+# print(player1.room.name)
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +54,49 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+print(f"Hello, {player1.name}!")
+time.sleep(1)
+print("To move, use cardinal directions: 'n', 's', 'e', 'w'.\nTo end game enter 'q'.")
+time.sleep(2)
+
+while True:
+    time.sleep(1)
+    print(f"Your current location is: {player1.room.name}")
+    print(f"{player1.room.description}")
+    time.sleep(1)
+    
+    moves = input("Which direction should we go? \n")
+    direction = moves.lower()
+
+    if direction == "q":
+        print("Game Over")
+        break 
+    elif direction == "n":
+        if hasattr(player1.room, "n_to"):
+            player1.room = player1.room.n_to   
+        else:
+            print("Invalid move, try again!")
+        moves
+    elif direction == "s":
+        if hasattr(player1.room, "s_to"):
+            player1.room = player1.room.s_to
+        else:
+            print("Invalid move, try again!")
+        moves
+    elif direction == "e":
+        if hasattr(player1.room, "e_to"):
+            player1.room = player1.room.e_to
+        else:
+            print("Invalid move, try again!")
+        moves
+    elif direction == "w":
+        if hasattr(player1.room, "w_to"):
+            player1.room = player1.room.w_to
+        else:
+            print("Invalid move, try again!")
+        moves
+    else:
+        print("Invalid move, try again!")
+
+    
+        
